@@ -25,7 +25,7 @@ struct __GOApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigatView()
         }
         .modelContainer(sharedModelContainer)
     }
