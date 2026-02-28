@@ -10,11 +10,13 @@ import SwiftUI
 struct HistoricalView: View {
     var body: some View {
         NavigationStack{
-            ScrollView {
-                VStack (spacing:20){
-                    
-                }
-                .padding(.vertical)
+            ScrollView{
+                Text("233").padding()
+                Text("233")
+                Text("233")
+                Text("233")
+                Text("233")
+                Text("233")
             }
             .navigationTitle("参展历史")
             .navigationBarTitleDisplayMode(.automatic)

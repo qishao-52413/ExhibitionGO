@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SettingsView: View {
+    @State private var searchText = ""
+    @Query(sort: \CosplayEvent.roleName, order: .reverse)  private var eventinfo: [CosplayEvent]
+    @Environment(\.modelContext) private var modelContext
     var body: some View {
+        NavigationStack{
             List{
                 NavigationLink{
                     PlanView()
@@ -21,10 +26,33 @@ struct SettingsView: View {
                 }label:{
                     Text("map")
                 }
-                Text("233")
+                if eventinfo.isEmpty {
+                    // 空状态提示
+                    ContentUnavailableView(
+                        "暂无活动",
+                        systemImage: "calendar.badge.exclamationmark",
+                        description: Text("你还没有添加任何展出计划。\n点击右上角 + 号添加。")
+                    )
+                }else{
+                    ForEach(eventinfo) { event in
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(event.roleName)
+                                .font(.headline)
+                                .foregroundColor(.primary) // 强制颜色
+                            
+                            Text(event.workName)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            
+                        }
+                        
+                    }
+                }
                 PhotosSelector()
                 
             }
+            .searchable(text: $searchText,prompt: "233")
+            .searchPresentationToolbarBehavior(.avoidHidingContent)
             .navigationTitle("设置")
             .navigationBarTitleDisplayMode(.automatic)
             .toolbar {
@@ -38,6 +66,7 @@ struct SettingsView: View {
                     }
                 }
             }
+        }
 //            NavigationLink{
 //                MapView()
 //            }
@@ -52,4 +81,15 @@ struct SettingsView: View {
         
         
     }
+    private func deleteEvent(_ event: CosplayEvent) {
+           withAnimation {
+               modelContext.delete(event) // 标记删除
+               try? modelContext.save()   // 保存更改
+           }
+       }
+
+}
+
+#Preview {
+    SettingsView()
 }

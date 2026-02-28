@@ -11,43 +11,42 @@ struct NavigatView :View {
     @State var value:Bool = true
     var body: some View {
         TabView{
-//            PlanView().tabItem(){
-//                Image(systemName: "list.bullet.clipboard")
-//                Text("计划")
-//            }
-//            HistoricalView().tabItem(){
-//                Label("历史",systemImage: "folder.fill")
-//            }
-//            MapView().tabItem(){
-//                Label("地图",systemImage: "map.fill")
-//            }
-//            SettingView().tabItem(){
-//                Label("设置",systemImage: "gearshape.fill")
-//            }
-            Tab("计划", systemImage: "list.bullet.clipboard") {
-                NavigationStack {
-                    PlanView()
-                }
+            PlanView().tabItem{
+                Label("计划", systemImage: "list.bullet.clipboard")
             }
-            Tab("历史", systemImage: "folder.fill") {
-                NavigationStack {
-                    HistoricalView()
-                }
+            HistoricalView().tabItem {
+                Label("历史", systemImage: "folder.fill")
             }
-            Tab("地图", systemImage: "map.fill") {
-                NavigationStack {
-                    MapView()
-                }
+            MapView().tabItem{
+                Label("地图", systemImage: "map.fill")
             }
-            Tab("设置", systemImage: "gearshape.fill") {
-                NavigationStack {
-                    SettingsView()
-                }
-                .navigationTitle("设置")
-                .navigationBarTitleDisplayMode(.automatic)
+            SettingsView().tabItem{
+                Label("设置", systemImage: "gearshape.fill")
             }
+            
+//            Tab("计划", systemImage: "list.bullet.clipboard") {
+//                NavigationStack {
+//                    PlanView()
+//                }
+//            }
+//            Tab("历史", systemImage: "folder.fill") {
+//                NavigationStack {
+//                    HistoricalView()
+//                }
+//            }
+//            Tab("地图", systemImage: "map.fill") {
+//                NavigationStack {
+//                    MapView()
+//                }
+//            }
+//            Tab("设置", systemImage: "gearshape.fill") {
+//                NavigationStack {
+//                    SettingsView()
+//                }
+//                .navigationTitle("设置")
+//                .navigationBarTitleDisplayMode(.automatic)
+//            }
         }
-        .tabViewStyle(.sidebarAdaptable)
         .tint(Color.red)
         //        .tabBarMinimizeBehavior(.onScrollDown)
         //        .tabViewBottomAccessory{
