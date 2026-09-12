@@ -10,44 +10,43 @@ import SwiftUI
 struct NavigatView :View {
     @State var value:Bool = true
     var body: some View {
-        TabView{
-            PlanView().tabItem{
-                Label("计划", systemImage: "list.bullet.clipboard")
+        if #available(iOS 18.0, *) {
+            TabView{
+                PlanView().tabItem{
+                    Label("计划", systemImage: "list.bullet.clipboard")
+                }
+                HistoricalView().tabItem {
+                    Label("历史", systemImage: "folder.fill")
+                }
+                MapView().tabItem{
+                    Label("地图", systemImage: "map.fill")
+                }
+                SettingsView().tabItem{
+                    Label("设置", systemImage: "gearshape.fill")
+                }
+                
             }
-            HistoricalView().tabItem {
-                Label("历史", systemImage: "folder.fill")
+            .tint(Color.red)
+            .tabViewStyle(.sidebarAdaptable)
+        } else {
+            TabView{
+                PlanView().tabItem{
+                    Label("计划", systemImage: "list.bullet.clipboard")
+                }
+                HistoricalView().tabItem {
+                    Label("历史", systemImage: "folder.fill")
+                }
+                MapView().tabItem{
+                    Label("地图", systemImage: "map.fill")
+                }
+                SettingsView().tabItem{
+                    Label("设置", systemImage: "gearshape.fill")
+                }
+                
             }
-            MapView().tabItem{
-                Label("地图", systemImage: "map.fill")
-            }
-            SettingsView().tabItem{
-                Label("设置", systemImage: "gearshape.fill")
-            }
-            
-//            Tab("计划", systemImage: "list.bullet.clipboard") {
-//                NavigationStack {
-//                    PlanView()
-//                }
-//            }
-//            Tab("历史", systemImage: "folder.fill") {
-//                NavigationStack {
-//                    HistoricalView()
-//                }
-//            }
-//            Tab("地图", systemImage: "map.fill") {
-//                NavigationStack {
-//                    MapView()
-//                }
-//            }
-//            Tab("设置", systemImage: "gearshape.fill") {
-//                NavigationStack {
-//                    SettingsView()
-//                }
-//                .navigationTitle("设置")
-//                .navigationBarTitleDisplayMode(.automatic)
-//            }
+            .tint(Color.red)
+            // Fallback on earlier versions
         }
-        .tint(Color.red)
         //        .tabBarMinimizeBehavior(.onScrollDown)
         //        .tabViewBottomAccessory{
         //            Text("233333")
@@ -58,36 +57,3 @@ struct NavigatView :View {
     NavigatView()
 }
 
-//struct navi: View {
-//    enum Tab: Int {
-//        case home, mall, my
-//    }
-//    @State var selectedTab = Tab.home
-//    var body: some View {
-//        NavigationView{
-//            TabView(selection: $selectedTab) {
-//                ContentView().tag(Tab.home) .tabItem {
-//                    if selectedTab == .home { Image("Relax")
-//                    } else {
-//                        Image("shouye-a")
-//                    }
-//                    Text("首页")
-//                }
-//                ContentView().tag(Tab.mall) .tabItem {
-//                    if selectedTab == .mall { Image("jfsc-b")
-//                    } else {
-//                        Image("jfsc-a")
-//                    }
-//                    Text("积分商城")
-//                }
-//                ContentView().tag(Tab.my) .tabItem {
-//                    if selectedTab == .my { Image("user_b")
-//                    } else {
-//                        Image("user_a")
-//                    }
-//                    Text("我的")
-//                }
-//            }.accentColor(Color.red)
-//        }
-//    }
-//}
